@@ -1,0 +1,17 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: random
+spec:
+  template:
+    metadata:
+      name: random
+    spec:
+      containers:
+      - name: random-python
+        image: random-python:latest
+        imagePullPolicy: IfNotPresent
+        command: ["python",  "app.py"]
+      restartPolicy: OnFailure
+  completions: 10
+  parallelism: 10
