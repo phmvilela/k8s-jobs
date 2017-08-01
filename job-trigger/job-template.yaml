@@ -1,0 +1,16 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: job
+spec:
+  template:
+    metadata:
+      name: job
+    spec:
+      containers:
+      - name: job
+        image: job:stable
+        imagePullPolicy: IfNotPresent
+      restartPolicy: OnFailure
+  completions: 2
+  parallelism: 2

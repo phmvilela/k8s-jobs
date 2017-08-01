@@ -1,0 +1,21 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: job-trigger
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: job-trigger
+    spec:
+      containers:
+      - name: job-trigger
+        image: job-trigger:stable
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8080
+      - name: kubectl
+        image: kubectl:stable
+        imagePullPolicy: IfNotPresent
+        args: ["proxy", "--port=8001"]
