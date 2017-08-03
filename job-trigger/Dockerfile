@@ -1,8 +1,9 @@
 # Use an official Python runtime as a parent image
 FROM python:2.7-slim
 
-RUN pip install kubernetes \
-                flask
+RUN pip install --upgrade \
+    kubernetes \
+    flask
 
 # Set the working directory to /app
 WORKDIR /app

@@ -24,12 +24,12 @@ def trigger_job():
     job_spec['metadata']['name'] = 'job-%s' % int(time.time() * 1000)
 
     try:
-        job = batch_api.create_namespaced_job('default', job_spec, pretty='true')
-        return dumps({'result':'SUCCESS'}), 200, {"Content-Type" : "application/json"}
+        batch_api.create_namespaced_job('default', job_spec)
+
+        return dumps({'result':job_spec['metadata']['name']}), 200, {"Content-Type" : "application/json"}
     except ApiException as e:
         print("Exception when calling create_namespaced_job: %s\n" % e)
         return dumps({'result':'FAILURE'}), 500, {"Content-Type" : "application/json"}
-
 
 
 if __name__ == '__main__':
